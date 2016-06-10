@@ -16,12 +16,13 @@
       }
 
       vm.getData = function(){
-        var rsp = PopulationService.getAllByYearCountry(vm.year,vm.country);
+        var rsp = PopulationService.getByYearAndCountry(vm.country,vm.year);
         rsp.then(function(data){
           vm.resultList = data;
         },function(err){
           console.log(err);
-        })
+        });
+        PopulationService.getByYears(vm.country,'2012','2014');
       }
 
       init();

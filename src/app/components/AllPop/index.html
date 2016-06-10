@@ -1,4 +1,16 @@
-<h1>Get information based on year and country</h1>
+<div class="well text-center">
+  <h3>Population Distribution by country and year</h3>
+</div>
+
+<label for="select" class="col-lg-2 control-label">Select Country</label>
+<div class="col-lg-4">
+  <select class="form-control" id="selectCountry" ng-model="allPop.country">
+    <option value="IN">India</option>
+    <option value="US">United States</option>
+    <option value="UK">United Kingdom</option>
+    <option value="CA">Cananda</option>
+  </select>
+</div>
 
 <label for="select" class="col-lg-2 control-label">Select Year</label>
 <div class="col-lg-4">
@@ -11,15 +23,6 @@
   </select>
 </div>
 
-<label for="select" class="col-lg-2 control-label">Select Country</label>
-<div class="col-lg-4">
-  <select class="form-control" id="selectCountry" ng-model="allPop.country">
-    <option value="IN">India</option>
-    <option value="US">United States</option>
-    <option value="UK">United Kingdom</option>
-    <option value="CA">Cananda</option>
-  </select>
-</div>
 <br></br>
 <div class="col-lg-12 text-center">
 <a href="" class="btn btn-primary btn-lg" ng-click="allPop.getData()">Get Data</a>
