@@ -17,7 +17,12 @@
         url: '/allPop',
         templateUrl: 'app/components/AllPop/index.html',
         controller: 'AllPopController',
-        controllerAs: 'allPop'
+        controllerAs: 'ctrl'
+      }).state('ageDistribution', {
+        url: '/ageDistribution',
+        templateUrl: 'app/components/AgeDistribution/index.html',
+        controller: 'ageDistributionController',
+        controllerAs: 'ctrl'
       });
 
     $urlRouterProvider.otherwise('/');

@@ -4,7 +4,7 @@
 
 <label for="select" class="col-lg-2 control-label">Select Country</label>
 <div class="col-lg-4">
-  <select class="form-control" id="selectCountry" ng-model="allPop.country">
+  <select class="form-control" id="selectCountry" ng-model="ctrl.country">
     <option value="IN">India</option>
     <option value="US">United States</option>
     <option value="UK">United Kingdom</option>
@@ -14,7 +14,7 @@
 
 <label for="select" class="col-lg-2 control-label">Select Year</label>
 <div class="col-lg-4">
-  <select class="form-control" id="selectYear" ng-model="allPop.year">
+  <select class="form-control" id="selectYear" ng-model="ctrl.year">
     <option value="2010">2010</option>
     <option value="2011">2011</option>
     <option value="2012">2012</option>
@@ -25,23 +25,9 @@
 
 <br></br>
 <div class="col-lg-12 text-center">
-<a href="" class="btn btn-primary btn-lg" ng-click="allPop.getData()">Get Data</a>
+<a href="" class="btn btn-primary btn-lg" ng-click="ctrl.getData()">Get Data</a>
 </div>
 
 
-<table class="table table-striped table-hover" ng-show="allPop.resultList">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Age</th>
-      <th>Population</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="row in allPop.resultList">
-    <td>{{$index+1}}</td>
-    <td>{{row[2]}}</td>
-    <td>{{row[3]}}</td>
-    </tr>
-  </tbody>
-</table>
+<highchart id="chart1" config="ctrl.chartConfig" class="col-md-12" ng-show="ctrl.resultList"></highchart>
+

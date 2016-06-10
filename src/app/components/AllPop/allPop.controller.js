@@ -17,8 +17,23 @@
 
       vm.getData = function(){
         var rsp = PopulationService.getByYearAndCountry(vm.country,vm.year);
-        rsp.then(function(data){
-          vm.resultList = data;
+        rsp.then(function(responseData){
+          vm.resultList = responseData;
+          vm.chartConfig = {
+            options: {
+              chart: {
+                type: 'line'
+              }
+            },
+            series: [{
+              data: responseData
+            }],
+            title: {
+              text: 'Population distribution over age'
+            },
+
+            loading: false
+          }
         },function(err){
           console.log(err);
         });

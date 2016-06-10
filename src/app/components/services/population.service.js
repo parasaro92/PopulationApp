@@ -22,7 +22,12 @@ function populationService($resource,$q){
     var deferred = $q.defer();
     response.$promise.then(function(data){
       data.splice(0,1);
-      deferred.resolve(data);
+      // Create a new Array to just hold the population
+      var formattedArray = [];
+      angular.forEach(data,function(element){
+        formattedArray.push(parseInt(element[3]));
+      })
+      deferred.resolve(formattedArray);
     },function(err){
       deferred.reject(err);
     });
