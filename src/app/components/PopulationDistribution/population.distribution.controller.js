@@ -3,9 +3,9 @@
   
     angular
     .module('populationApp')
-    .controller('AllPopController', allPop);
+    .controller('PopulationDistributionController', populationDistributionController);
 
-    function allPop(PopulationService){
+    function populationDistributionController(PopulationService){
 
       var vm = this;
 
@@ -22,14 +22,22 @@
           vm.chartConfig = {
             options: {
               chart: {
-                type: 'line'
+                type: 'column'
               }
             },
             series: [{
+              name: '',
               data: responseData
             }],
+            yAxis: {
+              title: {text: 'Population'},
+            },
+            xAxis: {
+              title: {text: 'Age'},
+            },            
             title: {
-              text: 'Population distribution over age'
+              text: 'Population distribution over age of '+vm.country
+              +' for the year '+vm.year
             },
 
             loading: false
@@ -37,7 +45,7 @@
         },function(err){
           console.log(err);
         });
-        PopulationService.getByYears(vm.country,'2012','2014');
+        
       }
 
       init();

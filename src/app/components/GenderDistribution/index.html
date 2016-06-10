@@ -1,9 +1,9 @@
 <div class="well text-center">
-  <h3>Change in Population Distribution for country over the years</h3>
+  <h3>Gender Distribution by country and year</h3>
 </div>
 
 <label for="select" class="col-lg-2 control-label">Select Country</label>
-<div class="col-lg-2">
+<div class="col-lg-4">
   <select class="form-control" id="selectCountry" ng-model="ctrl.country">
     <option value="IN">India</option>
     <option value="US">United States</option>
@@ -13,19 +13,8 @@
 </div>
 
 <label for="select" class="col-lg-2 control-label">Select Year</label>
-<div class="col-lg-2">
-  <select class="form-control" id="selectYear" ng-model="ctrl.year1">
-    <option value="2010">2010</option>
-    <option value="2011">2011</option>
-    <option value="2012">2012</option>
-    <option value="2013">2013</option>
-    <option value="2014">2014</option>
-  </select>
-</div>
-
-<label for="select" class="col-lg-2 control-label">Select Year</label>
-<div class="col-lg-2">
-  <select class="form-control" id="selectYear" ng-model="ctrl.year2">
+<div class="col-lg-4">
+  <select class="form-control" id="selectYear" ng-model="ctrl.year">
     <option value="2010">2010</option>
     <option value="2011">2011</option>
     <option value="2012">2012</option>
@@ -39,4 +28,6 @@
 <a href="" class="btn btn-primary btn-lg" ng-click="ctrl.getData()">Get Data</a>
 </div>
 
+
 <highchart id="chart1" config="ctrl.chartConfig" class="col-md-12" ng-show="ctrl.resultList"></highchart>
+

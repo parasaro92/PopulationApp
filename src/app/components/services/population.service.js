@@ -11,22 +11,22 @@ function populationService($resource,$q){
     vm.resourceObj = $resource(baseURL);
   }
 
-  vm.getByYearAndCountry = function(country,year){
+  vm.getByYearAndCountry = function(country,year,gender){
+    if (!gender){
+      gender = 0;
+    }
     var response = vm.resourceObj.query({
       get:'AREA_KM2,NAME,AGE,POP',
       FIPS: country,
       time: year,
-      SEX: 0,
+      SEX: gender,
       key: '3eebf698ef6c8df04e320bd0f4a6d0eda8e3bd33'
     });
     var deferred = $q.defer();
     response.$promise.then(function(data){
       data.splice(0,1);
       // Create a new Array to just hold the population
-      var formattedArray = [];
-      angular.forEach(data,function(element){
-        formattedArray.push(parseInt(element[3]));
-      })
+      var formattedArray = getFormattedArray(data);
       deferred.resolve(formattedArray);
     },function(err){
       deferred.reject(err);
@@ -37,11 +37,37 @@ function populationService($resource,$q){
   vm.getByYears = function(country,year1,year2){
     var rsp1 = vm.getByYearAndCountry(country,year1);
     var rsp2 = vm.getByYearAndCountry(country,year2);
+    var deferred = $q.defer();
     $q.all([rsp1,rsp2]).then(function(arrayResult){
       console.log(arrayResult);
+      deferred.resolve(arrayResult);
     },function(err){
       console.log(err);
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  }
+
+  vm.getGenderData = function(country,year){
+    var rsp1 = vm.getByYearAndCountry(country,year,1);
+    var rsp2 = vm.getByYearAndCountry(country,year,2);
+    var deferred = $q.defer();
+    $q.all([rsp1,rsp2]).then(function(arrayResult){
+      console.log(arrayResult);
+      deferred.resolve(arrayResult);
+    },function(err){
+      console.log(err);
+      deferred.reject(err);
+    });
+    return deferred.promise;
+  }
+
+  function getFormattedArray(inputArray){
+    var outputArray = [];
+    angular.forEach(inputArray,function(element){
+      outputArray.push(parseInt(element[3]));
     })
+    return outputArray;
   }
 
   init();

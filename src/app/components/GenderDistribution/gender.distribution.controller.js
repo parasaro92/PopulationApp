@@ -1,23 +1,21 @@
 (function(){
   'use strict';
-
   angular.module('populationApp')
-  .controller('AgeDistributionController',ageDistributionController);
+  .controller('GenderDistributionController',genderDistributionController);
 
-  function ageDistributionController(PopulationService){
+  function genderDistributionController(PopulationService){
     var vm = this;
 
     function init(){
         // Setting default values
-        vm.year1 = '2010';
-        vm.year2 = '2014';
+        vm.year = '2010';
         vm.country = 'IN';
     }
 
     vm.getData = function(){
-      var rsp = PopulationService.getByYears(vm.country,vm.year1,vm.year2);
-      rsp.then(function(respData){
-        vm.resultList = respData;
+      var rsp = PopulationService.getGenderData(vm.country,vm.year);
+      rsp.then(function(rspData){
+        vm.resultList = rspData;
         vm.chartConfig = {
           options: {
             chart: {
@@ -25,11 +23,11 @@
             }
           },
           series: [{
-            name: vm.year1,
-            data: respData[0]
+            name: 'Male',
+            data: rspData[0]
           },{
-            name: vm.year2,
-            data: respData[1] 
+            name:'Female',
+            data: rspData[1] 
           }],
           yAxis: {
             title: {text: 'Population'},
@@ -38,16 +36,19 @@
             title: {text: 'Age'},
           },            
           title: {
-            text: 'Population change over age'
+            text: 'Gender distribution over age'
           },
 
           loading: false
         }
+
       },function(err){
-        console.log(err);
-      });
+        console.log('Error retrieving data');
+      })
+      
     }
 
     init();
   }
+
 })();
