@@ -39,8 +39,8 @@ function populationService($resource,$q){
     var rsp2 = vm.getByYearAndCountry(country,year2);
     var deferred = $q.defer();
     $q.all([rsp1,rsp2]).then(function(arrayResult){
-      console.log(arrayResult);
-      deferred.resolve(arrayResult);
+      var formattedArray = calculatePercentDiff(arrayResult[0],arrayResult[1]);
+      deferred.resolve(formattedArray);
     },function(err){
       console.log(err);
       deferred.reject(err);
@@ -53,13 +53,22 @@ function populationService($resource,$q){
     var rsp2 = vm.getByYearAndCountry(country,year,2);
     var deferred = $q.defer();
     $q.all([rsp1,rsp2]).then(function(arrayResult){
-      console.log(arrayResult);
       deferred.resolve(arrayResult);
     },function(err){
       console.log(err);
       deferred.reject(err);
     });
     return deferred.promise;
+  }
+
+  function calculatePercentDiff(array1,array2){
+    var len = array1.length;
+    var outputArray = [];
+    for(var i = 0; i < len; i++){
+      var percentDiff = ((array2[i] - array1[i])/array1[i])*100;
+      outputArray.push(percentDiff) 
+    }
+    return outputArray;
   }
 
   function getFormattedArray(inputArray){

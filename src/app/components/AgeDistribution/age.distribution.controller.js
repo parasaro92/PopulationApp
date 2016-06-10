@@ -25,14 +25,11 @@
             }
           },
           series: [{
-            name: vm.year1,
-            data: respData[0]
-          },{
-            name: vm.year2,
-            data: respData[1] 
+            name: 'Percent Change',
+            data: respData
           }],
           yAxis: {
-            title: {text: 'Population'},
+            title: {text: 'Population Change Percent'},
           },
           xAxis: {
             title: {text: 'Age'},
